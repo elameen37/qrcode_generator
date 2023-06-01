@@ -2,13 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GenerateController;
+use App\Http\Controllers\QRCodeController;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 // Route::get('/',[ContactController::class, 'Index'])->name('home.page');
-//Route::get('/generate',[GenerateController::class, 'GenerateMethod']);   //->name('home.page');
+// Route::get('/generate',[GenerateController::class, 'GenerateMethod']);   //->name('home.page');
 
 // Route::get('/generate', function () {
 //     return view('generate');
