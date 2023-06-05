@@ -16,7 +16,7 @@
         <a href="{{ url('/') }}" class="logo"><img src="{{ asset('logo/logo.png') }}"></a>
         <div class="menuToggle" onclick="toggleMenu();"></div>
         <ul class="navigation">
-            <li><a href="{{ url('#') }}" onclick="toggleMenu();">Contact us</a></li>
+            <li><a href="{{ url('contact') }}" onclick="toggleMenu();">Contact us</a></li>
             <!-- <li><a href="{{ route('dashboard') }}" onclick="toggleMenu();">Home</a></li> -->
             <li><a href="{{ route('login') }}" onclick="toggleMenu();">Log In</a></li>
             <!-- <ul class="navbar-nav">
@@ -60,7 +60,7 @@
                 <ul class="info">
                     <li>
                         <span><i class="fa fa-map-marker"></i></span>
-                        <span>Kwaji Close <br> Maitama Abuja (FCT) <br>Nigeria</span>
+                        <span>Address Address <br> Street Street (STR) <br>Nigeria</span>
                     </li>
                     <li>
                         <span><i class="fa fa-phone"></i></span>
@@ -71,7 +71,7 @@
                     </li>
                     <li>
                         <span><i class="fa fa-envelope"></i></span>
-                        <p><a href="mailto:info@qrcode.com">info@qrcode.com</a></p>
+                        <p><a href="mailto:info@qrcode.com">info@qrcode-generator.com</a></p>
                     </li>
                 </ul>
             </div>

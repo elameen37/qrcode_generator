@@ -2,10 +2,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-<div class="flex bg-gray-100 min-h-screen">
+<div class="flex bg-gray-100" style="height: 65vh;">
   <!-- PDF Upload Form -->
-  <div class="w-1/2 p-8">
+  <div class="w-1/2 p-8" style="height: 100%;">
     <h2 class="text-2xl font-bold mb-4">Generate QR Code from PDF</h2>
     <form id="pdfForm" enctype="multipart/form-data">
       @csrf
@@ -26,7 +25,7 @@
   </div>
 
   <!-- URL Form -->
-  <div class="w-1/2 p-8 bg-white">
+  <div class="w-1/2 p-8 bg-white" style="height: 100%;">
     <h2 class="text-2xl font-bold mb-4">Generate QR Code from URL</h2>
     <form id="urlForm">
       <div class="mb-4">
@@ -47,10 +46,16 @@
 </div>
 
 <footer class="bg-gray-900 text-white py-4">
-  <div class="container mx-auto flex justify-center items-center">
-    <a href="/" class="text-gray-300 hover:text-white pr-4">Home</a>
-    <span class="text-gray-300">|</span>
-    <a href="#" class="text-gray-300 hover:text-white pl-4">Contact</a>
+  <div class="container mx-auto flex justify-between items-center">
+    <div class="ml-4">
+      <a href="/" class="text-gray-300 hover:text-white pr-4">Home</a>
+      <span class="text-gray-300">|</span>
+      <a href="contact" class="text-gray-300 hover:text-white pl-4">Contact Us</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="https://github.com" class="text-gray-300 hover:text-white">
+      <i class="fab fa-github h-6 w-6 inline-block">GITHUB</i>
+       </a>
+    </div>
   </div>
 </footer>
 
@@ -65,69 +70,56 @@
       }
       inputValue = pdfInput.files[0].name;
     } else {
-      inputValue = document.getElementById('url').value;
+      const urlInput = document.getElementById('url');
+      inputValue = urlInput.value;
+      urlInput.value = ''; // Clear the URL input field
     }
 
+    if (inputValue === '') {
+      Swal.fire({
+        title: 'Url field cannot be empty',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return; // Stop execution if input is empty
+    }
+
+    // if (!isValidURL(inputValue)) {
+    //     Swal.fire({
+    //       title: 'Invalid URL',
+    //       text: 'Please enter a valid URL',
+    //       icon: 'error',
+    //       confirmButtonText: 'OK'
+    //     });
+    //     return; // Stop execution if URL is invalid
+    //   }
+
     // Generate the QR code
-    const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(inputValue);
+    const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?color=FF0000&?size=300x200&data=' + encodeURIComponent(inputValue);
 
-    // Display the QR code in a popup
-    Swal.fire({
-      imageUrl: qrCodeUrl,
-      imageAlt: 'QR Code',
-      showCancelButton: false,
-      showConfirmButton: false,
-      customClass: {
-        content: 'py-0', // Reduce padding for the popup content
-        html: createShareButtonsTemplate(), //create share buttons
-        container: 'max-w-xl', // Increase the max-width of the popup container
-      },
-      footer: '<button id="closePopupBtn" class="mt-4 px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none">Close</button>',
-    });
-
-    // Add an event listener to the close button
-    document.getElementById('closePopupBtn').addEventListener('click', function() {
-      Swal.close(); // Close the popup when the button is clicked
-    });
+    function isValidURL(url) {
+      const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // IP address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+        '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+      return !!pattern.test(url);
+    }
 
     // Create the HTML template for the buttons
     function createButtonsTemplate() {
       return `
-    <div class="flex justify-between items-center">
-      <button id="downloadBtn" class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none">Download</button>
-      <button id="closePopupBtn" class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none">Close</button>
-    </div>
-  `;
-    }
-
-    // Display the QR code in a popup
-    Swal.fire({
-      imageUrl: qrCodeUrl,
-      imageAlt: 'QR Code',
-      showCancelButton: false,
-      showConfirmButton: false,
-      customClass: {
-        content: 'py-0', // Reduce padding for the popup content
-      },
-      footer: createButtonsTemplate(),
-    });
-
-    // Add an event listener to the download button
-    document.getElementById('downloadBtn').addEventListener('click', function() {
-      downloadQRCode(qrCodeUrl);
-    });
-
-    // Add an event listener to the close button
-    document.getElementById('closePopupBtn').addEventListener('click', function() {
-      Swal.close(); // Close the popup when the button is clicked
-    });
-
-    // Download the QR code
-    function downloadQRCode(qrCodeUrl) {
-      const link = document.createElement('a');
-      link.href = qrCodeUrl;
-      link.download = 'qrcode.png';
-      link.click();
+        <div class="flex justify-between items-center">
+          <div>
+            <a href="/qrcode_s/file.pdf" download class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none">Download File</a>
+          </div>
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <div>
+            <button id="closePopupBtn" class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none">Close Me</button>
+          </div>
+        </div>
+      `;
     }
 
     // Generate the share URL based on the current QR code data
@@ -140,24 +132,42 @@
     // Create the HTML template for the share buttons
     function createShareButtonsTemplate() {
       return `
-    <div class="flex justify-center space-x-4 mt-4">
-      <button class="share-button facebook"><i class="fab fa-facebook"></i> Share on Facebook</button>
-      <button class="share-button instagram"><i class="fab fa-instagram"></i> Share on Instagram</button>
-      <button class="share-button linkedin"><i class="fab fa-linkedin"></i> Share on LinkedIn</button>
-    </div>
-  `;
+        <div class="flex justify-end space-x-4 mt-4">
+          <div class="dropdown">
+            <button class="dropdown-toggle share-button">
+              <i class="fas fa-share-alt"></i> Share
+            </button>
+            <div class="dropdown-menu">
+              <button class="share-button facebook"><i class="fab fa-facebook"></i> Facebook</button>
+              <button class="share-button instagram"><i class="fab fa-instagram"></i> Instagram</button>
+              <button class="share-button linkedin"><i class="fab fa-linkedin"></i> LinkedIn</button>
+            </div>
+          </div>
+        </div>
+      `;
     }
 
-    // Display the QR code in a popup
+    // Display the QR code in a popup with share buttons
     Swal.fire({
       imageUrl: qrCodeUrl,
       imageAlt: 'QR Code',
       showCancelButton: false,
       showConfirmButton: false,
       customClass: {
-        content: 'py-0', // Reduce padding for the popup content
+        content: 'py-6', // Increase the padding top and bottom
+        html: createShareButtonsTemplate(), // Add share buttons
       },
-      html: createShareButtonsTemplate(),
+      footer: createButtonsTemplate(),
+    });
+
+    // Add an event listener to the download button
+    // document.getElementById('downloadBtn').addEventListener('click', function() {
+    //   downloadQRCode(qrCodeUrl);
+    // });
+
+    // Add an event listener to the close button
+    document.getElementById('closePopupBtn').addEventListener('click', function() {
+      Swal.close(); // Close the popup when the button is clicked
     });
 
     // Add event listeners to the share buttons
@@ -191,8 +201,16 @@
     // Share on LinkedIn
     function shareOnLinkedIn(shareUrl) {
       // Open the LinkedIn share dialog
-      window.open('https://www.linkedln.com' + encodeURIComponent(shareUrl), 'LInkedIn Share', 'width=600,height=400');
+      window.open('https://www.linkedin.com/shareArticle?url=' + encodeURIComponent(shareUrl), 'LinkedIn Share', 'width=600,height=400');
     }
 
+    // Download the QR code
+    function downloadQRCode(qrCodeUrl) {
+      const link = document.createElement('a');
+      link.href = qrCodeUrl;
+      link.download = 'qrcode.png';
+      link.click();
+    }
   }
 </script>
+
