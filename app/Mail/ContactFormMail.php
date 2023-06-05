@@ -35,9 +35,9 @@ class ContactFormMail extends Mailable
     public function envelope(): Envelope 
     {
         return new Envelope(
-            from: new Address('elameen37@gmail.com'),
+            from: new Address('lmninfohub37@gmail.com'),
             subject: $this->data['subject'],
-           // message: $this->data['message']
+            // message: $this->data['message']
             
         );
     }
@@ -50,11 +50,11 @@ class ContactFormMail extends Mailable
     public function content()
     {
 
-           // return $this->subject('test email')->view('emails.test');
+           return $this->subject('New Contact Message')->view('emails.ContactMail');
 
-        return new Content(
-            view: 'emails.test',
-        );
+        // return new Content(
+        //     view: 'emails.ContactMail',
+        // );
     }
 
     /**

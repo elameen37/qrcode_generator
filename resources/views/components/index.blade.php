@@ -51,11 +51,13 @@
       <a href="/" class="text-gray-300 hover:text-white pr-4">Home</a>
       <span class="text-gray-300">|</span>
       <a href="contact" class="text-gray-300 hover:text-white pl-4">Contact Us</a>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="https://github.com" class="text-gray-300 hover:text-white">
-      <i class="fab fa-github h-6 w-6 inline-block">GITHUB</i>
-       </a>
     </div>
+    <div class="ml-auto mr-16">
+      <a href="https://github.com/elameen37/qrcode_generator" class="text-gray-300 hover:text-white" target="_blank">
+        <i class="fab fa-github h-6 w-6 inline-block">GITHUB</i>
+      </a>
+    </div>
+  </div>
   </div>
 </footer>
 
@@ -84,15 +86,15 @@
       return; // Stop execution if input is empty
     }
 
-    // if (!isValidURL(inputValue)) {
-    //     Swal.fire({
-    //       title: 'Invalid URL',
-    //       text: 'Please enter a valid URL',
-    //       icon: 'error',
-    //       confirmButtonText: 'OK'
-    //     });
-    //     return; // Stop execution if URL is invalid
-    //   }
+    if (!isValidURL(inputValue)) {
+      Swal.fire({
+        title: 'Invalid URL',
+        text: 'Please enter a valid URL',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return; // Stop execution if URL is invalid
+    }
 
     // Generate the QR code
     const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?color=FF0000&?size=300x200&data=' + encodeURIComponent(inputValue);
@@ -111,42 +113,37 @@
     function createButtonsTemplate() {
       return `
         <div class="flex justify-between items-center">
-          <div>
+          <div class="ml-4">
             <a href="/qrcode_s/file.pdf" download class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none">Download File</a>
           </div>
           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <div>
-            <button id="closePopupBtn" class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none">Close Me</button>
+          <div class="ml-auto mr-8">
+            <button id="closePopupBtn" class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none">
+            <i class="fas fa-times"></i> Close Me
+            </button>
           </div>
         </div>
       `;
     }
 
     // Generate the share URL based on the current QR code data
-    function generateShareUrl() {
-      // Replace this with your actual share URL generation logic
-      const qrCodeData = 'QR Code data';
-      return 'https://example.com/share?data=' + encodeURIComponent(qrCodeData);
-    }
+    // function generateShareUrl() {
+    //   // Replace this with your actual share URL generation logic
+    //   const qrCodeData = 'QR Code data';
+    //   return 'https://example.com/share?data=' + encodeURIComponent(qrCodeData);
+    // }
 
     // Create the HTML template for the share buttons
-    function createShareButtonsTemplate() {
-      return `
-        <div class="flex justify-end space-x-4 mt-4">
-          <div class="dropdown">
-            <button class="dropdown-toggle share-button">
-              <i class="fas fa-share-alt"></i> Share
-            </button>
-            <div class="dropdown-menu">
-              <button class="share-button facebook"><i class="fab fa-facebook"></i> Facebook</button>
-              <button class="share-button instagram"><i class="fab fa-instagram"></i> Instagram</button>
-              <button class="share-button linkedin"><i class="fab fa-linkedin"></i> LinkedIn</button>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
+    // Create the HTML template for the share buttons
+function createShareButtonsTemplate() {
+  return `
+    <div class="flex justify-end space-x-4 mt-4">
+      <button class="share-button facebook"><i class="fab fa-facebook"></i> Share on Facebook</button>
+      <button class="share-button instagram"><i class="fab fa-instagram"></i> Share on Instagram</button>
+      <button class="share-button linkedin"><i class="fab fa-linkedin"></i> Share on LinkedIn</button>
+    </div>
+  `;
+}
     // Display the QR code in a popup with share buttons
     Swal.fire({
       imageUrl: qrCodeUrl,
@@ -156,8 +153,10 @@
       customClass: {
         content: 'py-6', // Increase the padding top and bottom
         html: createShareButtonsTemplate(), // Add share buttons
+        html: createButtonsTemplate(), // Add Download and close buttons
       },
       footer: createButtonsTemplate(),
+      footer: createShareButtonsTemplate(),
     });
 
     // Add an event listener to the download button
@@ -213,4 +212,3 @@
     }
   }
 </script>
-
