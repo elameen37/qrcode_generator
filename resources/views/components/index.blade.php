@@ -52,6 +52,17 @@
       <span class="text-gray-300">|</span>
       <a href="contact" class="text-gray-300 hover:text-white pl-4">Contact Us</a>
     </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="language-selector flex justify-center ml-16">
+      <a href="#" class="language-link text-gray-300 hover:text-white pr-4 font-medium">English</a>
+      <span class="separator text-gray-300 hover:text-white pr-4 mx-2">|</span>
+      <a href="#" class="language-link text-gray-300 hover:text-white pr-4 font-medium">العربية</a>
+      <span class="separator text-gray-300 hover:text-white mx-2">|</span>
+      <a href="#" class="language-link text-gray-300 hover:text-white pr-4 font-medium">Français</a>
+      <span class="separator text-gray-300 hover:text-white mx-2">|</span>
+      <a href="#" class="language-link text-gray-300 hover:text-white pr-4 font-medium">Español</a>
+    </div>
+
     <div class="ml-auto mr-16">
       <a href="https://github.com/elameen37/qrcode_generator" class="text-gray-300 hover:text-white" target="_blank">
         <i class="fab fa-github h-6 w-6 inline-block">GITHUB</i>
@@ -86,35 +97,35 @@
       return; // Stop execution if input is empty
     }
 
-    if (!isValidURL(inputValue)) {
-      Swal.fire({
-        title: 'Invalid URL',
-        text: 'Please enter a valid URL',
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-      return; // Stop execution if URL is invalid
-    }
+    // if (!isValidURL(inputValue)) {
+    //   Swal.fire({
+    //     title: 'Invalid URL',
+    //     text: 'Please enter a valid URL',
+    //     icon: 'error',
+    //     confirmButtonText: 'OK'
+    //   });
+    //   return; // Stop execution if URL is invalid
+    // }
+
+    // function isValidURL(url) {
+    //   const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+    //     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+    //     '((\\d{1,3}\\.){3}\\d{1,3}))' + // IP address
+    //     '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+    //     '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+    //     '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+    //   return !!pattern.test(url);
+    // }
 
     // Generate the QR code
     const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?color=FF0000&?size=300x200&data=' + encodeURIComponent(inputValue);
-
-    function isValidURL(url) {
-      const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))' + // IP address
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-        '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
-      return !!pattern.test(url);
-    }
 
     // Create the HTML template for the buttons
     function createButtonsTemplate() {
       return `
         <div class="flex justify-between items-center">
           <div class="ml-4">
-            <a href="/qrcode_s/file.pdf" download class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none">Download File</a>
+            <a href="#" id="downloadBtn" class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none">Download QR Code</a>
           </div>
           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <div class="ml-auto mr-8">
@@ -126,28 +137,39 @@
       `;
     }
 
-    // Generate the share URL based on the current QR code data
-    // function generateShareUrl() {
-    //   // Replace this with your actual share URL generation logic
-    //   const qrCodeData = 'QR Code data';
-    //   return 'https://example.com/share?data=' + encodeURIComponent(qrCodeData);
-    // }
+    // Function to download the QR code
+    async function downloadQRCode(qrCodeUrl) {
+      try {
+        const response = await fetch(qrCodeUrl);
+        const blob = await response.blob();
+
+        // Create a temporary anchor element
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute('download', 'qrcode.png');
+        link.click();
+
+        // Clean up the temporary anchor element
+        URL.revokeObjectURL(link.href);
+      } catch (error) {
+        console.error('Failed to download QR code:', error);
+      }
+    }
 
     // Create the HTML template for the share buttons
-    // Create the HTML template for the share buttons
-function createShareButtonsTemplate() {
-  return `
+    function createShareButtonsTemplate() {
+      return `
     <div class="flex justify-end space-x-4 mt-4">
       <button class="share-button facebook"><i class="fab fa-facebook"></i> Share on Facebook</button>
       <button class="share-button instagram"><i class="fab fa-instagram"></i> Share on Instagram</button>
       <button class="share-button linkedin"><i class="fab fa-linkedin"></i> Share on LinkedIn</button>
     </div>
   `;
-}
+    }
     // Display the QR code in a popup with share buttons
     Swal.fire({
       imageUrl: qrCodeUrl,
-      imageAlt: 'QR Code',
+      imageAlt: 'QRCode',
       showCancelButton: false,
       showConfirmButton: false,
       customClass: {
@@ -155,14 +177,14 @@ function createShareButtonsTemplate() {
         html: createShareButtonsTemplate(), // Add share buttons
         html: createButtonsTemplate(), // Add Download and close buttons
       },
-      footer: createButtonsTemplate(),
       footer: createShareButtonsTemplate(),
+      footer: createButtonsTemplate(),
     });
 
     // Add an event listener to the download button
-    // document.getElementById('downloadBtn').addEventListener('click', function() {
-    //   downloadQRCode(qrCodeUrl);
-    // });
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+      downloadQRCode(qrCodeUrl);
+    });
 
     // Add an event listener to the close button
     document.getElementById('closePopupBtn').addEventListener('click', function() {
@@ -203,12 +225,33 @@ function createShareButtonsTemplate() {
       window.open('https://www.linkedin.com/shareArticle?url=' + encodeURIComponent(shareUrl), 'LinkedIn Share', 'width=600,height=400');
     }
 
-    // Download the QR code
-    function downloadQRCode(qrCodeUrl) {
-      const link = document.createElement('a');
-      link.href = qrCodeUrl;
-      link.download = 'qrcode.png';
-      link.click();
+    // Generate the share URL based on the current QR code data
+    function generateShareUrl() {
+      // Replace this with your actual share URL generation logic
+      const qrCodeData = 'QR Code data';
+      return 'https://aacode.com/share?data=' + encodeURIComponent(qrCodeData);
     }
+
+    // Download the QR code
+    // function downloadQRCode(qrCodeUrl) {
+    //   const link = document.createElement('a');
+    //   link.href = qrCodeUrl;
+    //   link.download = 'qrcode.png';
+    //   link.click();
+    // }
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const languageLinks = document.querySelectorAll('.language-link');
+
+    languageLinks.forEach(function(link) {
+      link.addEventListener('click', function(event) {
+        event.preventDefault();
+        const selectedLanguage = this.textContent;
+        // Perform language change actions based on the selected language
+        console.log('Selected Language:', selectedLanguage);
+      });
+    });
+  });
+
   }
 </script>
