@@ -36,7 +36,7 @@ class ContactFormMail extends Mailable
     {
         return new Envelope(
             from: new Address('lmninfohub37@gmail.com'),
-            subject: $this->data['subject'],
+            //subject: $this->data['subject'],
             // message: $this->data['message']
             
         );

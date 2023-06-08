@@ -1,16 +1,16 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:'Lucida Sans Unicode';
+    font-family: "Lucida Sans Unicode";
     scroll-behavior: smooth;
 }
 
-body{
-    background: #fff;
+body {
+    background: #ffffff;
 }
 
-header{
+header {
     position: fixed;
     top: 0;
     left: 0;
@@ -23,58 +23,57 @@ header{
     transition: 0.5s;
 }
 
-section{
+section {
     position: relative;
     padding: 80px;
 }
 
-.sticky{
-    background-color: rgba(255,255,255, 0.9333);
+.sticky {
+    background-color: rgba(3, 3, 3, 0.933);
     padding: 10px 100px;
-    
 }
 
-header .logo img{
+header .logo img {
     top: 0;
     left: 0;
-    height: 90px;
-    width: 100px;
+    height: 55px;
+    width: 150px;
 }
 
-header .navigation{
+header .navigation {
     position: relative;
     display: flex;
 }
 
-header .navigation li{
+header .navigation li {
     list-style: none;
     margin-left: 40px;
     margin-top: 18px;
 }
 
-header .navigation li a{
+header .navigation li a {
     text-decoration: none;
-    color:#0a0a0a;
-    font-size: 22px;
+    color: #000000;
+    font-size: 20px;
     font-weight: 500;
 }
 
-header .navigation li a:hover{
-    color: #da15a8;
-    transition: .5s ease-in-out;
+header .navigation li a:hover {
+    color: #b8b4b7;
+    transition: 0.5s ease-in-out;
 }
 
-.sticky .navigation li a{
-    color: #111;
+.sticky .navigation li a {
+    color: #ffffff;
 }
 
-.sticky .navigation li a:hover{
-    color: #da15a8;
-    transition: .5s ease-in-out;
+.sticky .navigation li a:hover {
+    color: #b8b4b7;
+    transition: 0.5s ease-in-out;
 }
 
 .btn-primary {
-    background-color: rgb(36, 33, 33);
+    background-color: rgb(10, 10, 10);
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -86,25 +85,44 @@ header .navigation li a:hover{
 }
 
 .btn-primary:hover {
-    background-color: #da15a8;
-  }
+    background-color: #b8b4b7;
+}
 
 .btn-primary a {
     color: inherit;
     text-decoration: none;
 }
 
-.banner{
+.btn-primary2 {
+    background-color: rgb(10, 10, 10);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 23px;
+    border-radius: 4px;    
+    text-decoration: none;
+}
+
+.btn-primary2:hover {
+    background-color: #b8b4b7;
+}
+
+.btn-primary2 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.banner {
     position: relative;
     width: 100%;
-    min-height: 120vh;
+    min-height: 110vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.banner::before{
-    content: '';
+.banner::before {
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -114,7 +132,7 @@ header .navigation li a:hover{
     /*background: linear-gradient(to top, rgb(31, 29, 29), transparent);*/
 }
 
-.banner .content .c1{
+.banner .content .c1 {
     position: relative;
     max-width: 500px;
     text-align: center;
@@ -122,72 +140,34 @@ header .navigation li a:hover{
     z-index: 1;
 }
 
-.banner .content .c2{
+.banner .content .c2 {
     position: relative;
     max-width: 500px;
     text-align: center;
     background-color: #000000;
     z-index: 1;
+    max-height: 100px;
 }
 
-.banner .content h4{
-    color: #fff;
+.banner .content h4 {
+    color: #b8b4b7;
     font-size: 4em;
-    text-shadow: 1.5px 2px 1.5px rgb(0,0,0);
-    text-align:center;
+    text-shadow: 1.5px 2px 1.5px rgb(0, 0, 0);
+    text-align: left;
 }
 
-.banner .content p{
-    color: #fff;
-    font-size: 1.4em;
+.banner .content h6 {
+    color: #000000;
+    font-size: 2em;
+    text-align: left;
 }
 
-.btn{
-    position: relative;
-    display: inline-block;
-    margin-top: 30px;
-    padding: 10px 30px;
-    background: #fff;
-    color: rgb(218, 21, 168);
-    text-decoration: none;
-    transition: 0.5s;
+.content {
+    border-radius: 7px;
+    border-color: #000000;
 }
 
-.btn2{
-    position: relative;
-    display: inline-block;
-    margin-top: 30px;
-    padding: 10px 30px;
-    background: #fff;
-    border: 2px solid rgb(218, 21, 168);
-    color:rgb(218, 21, 168);
-    text-decoration: none;
-    transition: 0.5s;
-}
-
-.btn3{
-    position: relative;
-    display: inline-block;
-    margin-top: 30px;
-    padding: 10px 30px;
-    background: rgb(218, 21, 168);;
-    color: #fff;
-    text-decoration: none;
-    transition: 0.5s;
-}
-
-.btn:hover{
-    background-color:rgb(218, 21, 168);
-    color: #fff;
-}
-
-.btn2:hover{
-    background-color: rgb(218, 21, 168);
-    border: none;
-    color: #fff;
-}
-
-.fitBg{
+.fitBg {
     position: absolute;
     top: 0;
     left: 0;
@@ -197,69 +177,7 @@ header .navigation li a:hover{
     /* opacity: 0px; */
 }
 
-.about{
-    position: relative;
-    width: 100%;
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    
-}
-
-.about .contentBx{
-    max-width: 50%;
-    width: 50%;
-    text-align:justify;
-    padding-right: 40px;
-}
-
-.tittleText{
-    font-weight: 600;
-    color: #111;
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-.title-text{
-    color: #111;
-    font-size: 1em;
-    text-align:center;
-}
-
-
-.contact{
-    background: url(../images/image13.jpg);
-    background-size: cover;
-    position: relative;
-}
-
-.contact .contact-Text{
-    text-align: center;
-    font-size: 40px;
-    color: #fff;
-    text-shadow: 1.5px 2px 1.5px rgb(0,0,0);
-}
-
-.contact .contact-Text span{
-    font-size: 50px;
-    color: rgb(218, 21, 168);
-}
-
-.contact .contact-text{
-    color: #fff;
-    text-align: center;
-    font-size: 18px;
-    text-shadow: 1.5px 2px 1.5px rgb(0,0,0);
-}
-
-.container2 p{
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 10em;
-}
-
-footer{
+footer {
     position: relative;
     width: 100%;
     height: auto;
@@ -269,56 +187,55 @@ footer{
     justify-content: space-between;
 }
 
-footer .container{
+footer .container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     flex-direction: row;
 }
 
-footer .container .sec{
+footer .container .sec {
     margin-right: 30px;
 }
 
-footer .container .sec.aboutus{
+footer .container .sec.aboutus {
     width: 40%;
 }
 
-footer .container h2{
+footer .container h2 {
     position: relative;
     color: #fff;
     margin-bottom: 15px;
 }
 
-
-footer .container h2::before{
-    content: '';
+footer .container h2::before {
+    content: "";
     position: absolute;
     bottom: -5px;
     left: 0;
     width: 50px;
     height: 2px;
-    background: rgb(218, 21, 168);
+    background: rgb(255, 255, 255);
 }
 
-footer p{
+footer p {
     color: #999;
 }
 
-footer .container .sec.aboutus p{
+footer .container .sec.aboutus p {
     text-align: justify;
 }
 
-.sci{
+.sci {
     margin: 20px;
     display: flex;
 }
 
-.sci li{
+.sci li {
     list-style: none;
 }
 
-.sci li a{
+.sci li a {
     display: inline-block;
     width: 40px;
     height: 40px;
@@ -332,70 +249,49 @@ footer .container .sec.aboutus p{
     transition: 0.5s;
 }
 
-.sci li a:hover{
-    background:  rgb(218, 21, 168);
+.sci li a:hover {
+    background: #b8b4b7;
 }
 
-.sci li a .fa{
+.sci li a .fa {
     color: #fff;
     font-size: 20px;
 }
 
-.quickLinks{
-    position: relative;
-    width: 25%;
-}
-
-.quickLinks ul li{
-    list-style: none;
-}
-
-.quickLinks ul li a{
-    color: #999;
-    text-decoration: none;
-    margin-bottom: 10px;
-    display: inline-block;
-    transition: 0.3s;
-}
-
-.quickLinks ul li a:hover{
-    color: #fff;
-}
-
-footer .container .contactBx{
+footer .container .contactBx {
     width: calc(35% - 60px);
     margin-right: 0 !important;
 }
 
-.contactBx .info{
+.contactBx .info {
     position: relative;
 }
 
-.contactBx .info li{
+.contactBx .info li {
     display: flex !important;
     margin-bottom: 16px;
 }
 
-.contactBx .info li span:nth-child(1){
+.contactBx .info li span:nth-child(1) {
     color: #fff;
     font-size: 20px;
     margin-right: 10px;
 }
-.contactBx .info li span{
+.contactBx .info li span {
     color: #999;
 }
 
-.contactBx .info li a{
+.contactBx .info li a {
     color: #999;
     text-decoration: none;
-    transition:  0.5s;
+    transition: 0.5s;
 }
 
-.contactBx .info li a:hover{
+.contactBx .info li a:hover {
     color: #fff;
 }
 
-.copyrightText{
+.copyrightText {
     width: 100%;
     background-color: #181818;
     padding: 8px 100px;
@@ -403,17 +299,17 @@ footer .container .contactBx{
     color: #999;
 }
 
-@media (max-width: 767px){
+@media (max-width: 767px) {
     header,
-    header.sticky{
+    header.sticky {
         padding: 10px 20px;
     }
 
-    header .navigation{
+    header .navigation {
         display: none;
     }
 
-    header .navigation.active{
+    header .navigation.active {
         display: none;
         width: 100%;
         height: calc(100% - 68px);
@@ -427,11 +323,11 @@ footer .container .contactBx{
         background: #fff;
     }
 
-    header .navigation li{
+    header .navigation li {
         margin-left: 0;
     }
 
-    header .navigation li a{
+    header .navigation li a {
         text-decoration: none;
         color: #111;
         line-height: 50px;
@@ -439,7 +335,7 @@ footer .container .contactBx{
         font-weight: 300;
     }
 
-    .menuToggle{
+    .menuToggle {
         position: relative;
         width: 40px;
         height: 40px;
@@ -450,38 +346,38 @@ footer .container .contactBx{
         cursor: pointer;
     }
 
-    .menuToggle.active{
+    .menuToggle.active {
         background: url(../images/close.png);
         background-size: 25px;
         background-repeat: no-repeat;
         background-position: center;
     }
 
-    header.sticky .menuToggle{
+    header.sticky .menuToggle {
         filter: invert(1);
     }
 
-    section{
+    section {
         padding: 40px;
     }
-    
-    .banner .content h2{
+
+    .banner .content h2 {
         font-size: 2.5em;
     }
 
-    .banner img{
+    .banner img {
         width: 100%;
     }
 
-    .banner .content p{
+    .banner .content p {
         font-size: 1em;
     }
 
-    .about{
+    .about {
         flex-direction: column;
     }
 
-    .about .contentBx{
+    .about .contentBx {
         min-width: 100%;
         width: 100%;
         text-align: center;
@@ -489,71 +385,52 @@ footer .container .contactBx{
     }
 
     .about .contentBx,
-    .about .imgBx{
+    .about .imgBx {
         min-width: 100%;
         width: 100%;
         padding-right: 0px;
         text-align: center;
     }
 
-    .about .imgBx{
+    .about .imgBx {
         min-height: 250px;
     }
 
     .btn,
     .btn2,
-    .btn3{
+    .btn3 {
         margin-bottom: 30px;
-    }
-
-    .mission .mission-list .box{
-        position: relative;
-        max-width: 350px;
-        max-width: initial;
-        width: 350px;
-        height: 400px;
-    }
-
-    .mission .mission-list .box .imgBx{
-        height: 320px;
-    }
-
-    .testimonial .testimonial-content .box{
-        margin: 15px;
-        padding: 20px;
-    }
-
+    }    
 }
 
-@media (max-width: 991px){
-    footer{
+@media (max-width: 991px) {
+    footer {
         padding: 40px;
-        font-size: 20px
+        font-size: 20px;
     }
 
-    footer .container{
+    footer .container {
         flex-direction: column;
     }
 
-    footer .container .sec{
+    footer .container .sec {
         margin-right: 0;
         margin-bottom: 40px;
     }
 
-    footer .container .sec.aboutus{
+    footer .container .sec.aboutus {
         width: 100% !important;
     }
 
-    footer .container .quickLinks{
+    footer .container .quickLinks {
         width: 100%;
     }
 
-    footer .container .contactBx{
+    footer .container .contactBx {
         width: 100%;
     }
 
-    .copyrightText{
+    .copyrightText {
         padding: 8px 40px;
     }
 }
-

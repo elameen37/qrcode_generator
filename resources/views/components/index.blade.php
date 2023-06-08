@@ -2,7 +2,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<div class="flex bg-gray-100" style="height: 65vh;">
+<div class="flex bg-gray-100" style="height: 52vh;">
   <!-- PDF Upload Form -->
   <div class="w-1/2 p-8" style="height: 100%;">
     <h2 class="text-2xl font-bold mb-4">Generate QR Code from PDF</h2>
@@ -45,15 +45,15 @@
   </div>
 </div>
 
-<footer class="bg-gray-900 text-white py-4">
-  <div class="container mx-auto flex justify-between items-center">
+<footer class="bg-black text-white py-4">
+  <div class="container mx-auto flex justify-between items-start">
     <div class="ml-4">
       <a href="/" class="text-gray-300 hover:text-white pr-4">Home</a>
       <span class="text-gray-300">|</span>
       <a href="contact" class="text-gray-300 hover:text-white pl-4">Contact Us</a>
     </div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <div class="language-selector flex justify-center ml-16">
+    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+    <!-- <div class="language-selector flex justify-center ml-16">
       <a href="#" class="language-link text-gray-300 hover:text-white pr-4 font-medium">English</a>
       <span class="separator text-gray-300 hover:text-white pr-4 mx-2">|</span>
       <a href="#" class="language-link text-gray-300 hover:text-white pr-4 font-medium">العربية</a>
@@ -61,6 +61,10 @@
       <a href="#" class="language-link text-gray-300 hover:text-white pr-4 font-medium">Français</a>
       <span class="separator text-gray-300 hover:text-white mx-2">|</span>
       <a href="#" class="language-link text-gray-300 hover:text-white pr-4 font-medium">Español</a>
+    </div> -->
+
+    <div class="ml-auto mr-16 flex justify-center">
+      <div id="google_translate_element"></div>
     </div>
 
     <div class="ml-auto mr-16">
@@ -82,10 +86,12 @@
         return; // No file selected, do nothing
       }
       inputValue = pdfInput.files[0].name;
+      inputValue = pdfInput.value;
+      pdfInput.value = ''; // Clear the URL input field
     } else {
       const urlInput = document.getElementById('url');
       inputValue = urlInput.value;
-      urlInput.value = ''; // Clear the URL input field
+      urlInput.value = ''; // Clear the URL input field      
     }
 
     if (inputValue === '') {
@@ -118,24 +124,30 @@
     // }
 
     // Generate the QR code
-    const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?color=FF0000&?size=300x200&data=' + encodeURIComponent(inputValue);
+    const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?color=00f&?size=300x200&data=' + encodeURIComponent(inputValue);
 
     // Create the HTML template for the buttons
     function createButtonsTemplate() {
       return `
-        <div class="flex justify-between items-center">
-          <div class="ml-4">
-            <a href="#" id="downloadBtn" class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none">Download QR Code</a>
-          </div>
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <div class="ml-auto mr-8">
-            <button id="closePopupBtn" class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none">
-            <i class="fas fa-times"></i> Close Me
-            </button>
-          </div>
-        </div>
-      `;
+    <div class="relative inline-block text-left">
+    <select id="shareDropdown" class="inline-flex justify-center items-center border border-gray-300 rounded-md py-2 px-4 pr-8 leading-tight bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <option selected disabled>Share</option>
+        <option value="facebook">Facebook</option>
+        <option value="instagram">Instagram</option>
+        <option value="linkedin">LinkedIn</option>
+      </select>
+                  
+      <a href="#" id="downloadBtn" class="inline-flex justify-center items-center ml-4 px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <i class="fas fa-download"></i> Download
+      </a>
+      
+      <button id="closePopupBtn" class="inline-flex justify-center items-center ml-4 px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <i class="fas fa-times"></i> Close Popup
+      </button>
+    </div>
+  `;
     }
+
 
     // Function to download the QR code
     async function downloadQRCode(qrCodeUrl) {
@@ -157,15 +169,15 @@
     }
 
     // Create the HTML template for the share buttons
-    function createShareButtonsTemplate() {
-      return `
-    <div class="flex justify-end space-x-4 mt-4">
-      <button class="share-button facebook"><i class="fab fa-facebook"></i> Share on Facebook</button>
-      <button class="share-button instagram"><i class="fab fa-instagram"></i> Share on Instagram</button>
-      <button class="share-button linkedin"><i class="fab fa-linkedin"></i> Share on LinkedIn</button>
-    </div>
-  `;
-    }
+    //   function createShareButtonsTemplate() {
+    //     return `
+    //   <div class="flex justify-end space-x-4 mt-4">
+    //     // <button class="share-button facebook"><i class="fab fa-facebook"></i> Share on Facebook</button>
+    //     // <button class="share-button instagram"><i class="fab fa-instagram"></i> Share on Instagram</button>
+    //     // <button class="share-button linkedin"><i class="fab fa-linkedin"></i> Share on LinkedIn</button>
+    //   </div>
+    // `;
+    //   }
     // Display the QR code in a popup with share buttons
     Swal.fire({
       imageUrl: qrCodeUrl,
@@ -174,10 +186,10 @@
       showConfirmButton: false,
       customClass: {
         content: 'py-6', // Increase the padding top and bottom
-        html: createShareButtonsTemplate(), // Add share buttons
+        //html: createShareButtonsTemplate(), // Add share buttons
         html: createButtonsTemplate(), // Add Download and close buttons
       },
-      footer: createShareButtonsTemplate(),
+      //footer: createShareButtonsTemplate(),
       footer: createButtonsTemplate(),
     });
 
@@ -191,46 +203,73 @@
       Swal.close(); // Close the popup when the button is clicked
     });
 
+    // Add event listener to the share dropdown
+    document.addEventListener('DOMContentLoaded', function() {
+      const shareDropdown = document.getElementById('shareDropdown');
+
+      shareDropdown.addEventListener('change', function() {
+        const selectedOption = this.value;
+        let shareLink;
+
+        switch (selectedOption) {
+          case 'facebook':
+            shareLink = 'https://www.facebook.com/sharer/share.php?u=https://your-website-url.com';
+            break;
+          case 'instagram':
+            shareLink = 'https://www.instagram.com/';
+            break;
+          case 'linkedin':
+            shareLink = 'https://www.linkedin.com/shareArticle?url=https://your-website-url.com';
+            break;
+          default:
+            return;
+        }
+
+        // Open the share link in a new window/tab
+        window.open(shareLink, '_blank');
+      });
+    });
+
     // Add event listeners to the share buttons
-    document.querySelector('.share-button.facebook').addEventListener('click', function() {
-      const shareUrl = generateShareUrl();
-      shareOnFacebook(shareUrl);
-    });
+    // document.querySelector('.share-button.facebook').addEventListener('click', function() {
+    //   const shareUrl = generateShareUrl();
+    //   shareOnFacebook(shareUrl);
+    // });
 
-    document.querySelector('.share-button.instagram').addEventListener('click', function() {
-      const shareUrl = generateShareUrl();
-      shareOnInstagram(shareUrl);
-    });
+    // document.querySelector('.share-button.instagram').addEventListener('click', function() {
+    //   const shareUrl = generateShareUrl();
+    //   shareOnInstagram(shareUrl);
+    // });
 
-    document.querySelector('.share-button.linkedin').addEventListener('click', function() {
-      const shareUrl = generateShareUrl();
-      shareOnLinkedIn(shareUrl);
-    });
+    // document.querySelector('.share-button.linkedin').addEventListener('click', function() {
+    //   const shareUrl = generateShareUrl();
+    //   shareOnLinkedIn(shareUrl);
+    // });
 
-    // Share on Facebook
-    function shareOnFacebook(shareUrl) {
-      // Open the Facebook share dialog
-      window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), 'Facebook Share', 'width=600,height=400');
-    }
+    // // Share on Facebook
+    // function shareOnFacebook(shareUrl) {
+    //   // Open the Facebook share dialog
+    //   window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), 'Facebook Share', 'width=600,height=400');
+    // }
 
-    // Share on Instagram
-    function shareOnInstagram(shareUrl) {
-      // Open the Instagram share dialog
-      window.open('https://www.instagram.com' + encodeURIComponent(shareUrl), 'Instagram Share', 'width=600,height=400');
-    }
+    // // Share on Instagram
+    // function shareOnInstagram(shareUrl) {
+    //   // Open the Instagram share dialog
+    //   window.open('https://www.instagram.com' + encodeURIComponent(shareUrl), 'Instagram Share', 'width=600,height=400');
+    // }
 
-    // Share on LinkedIn
-    function shareOnLinkedIn(shareUrl) {
-      // Open the LinkedIn share dialog
-      window.open('https://www.linkedin.com/shareArticle?url=' + encodeURIComponent(shareUrl), 'LinkedIn Share', 'width=600,height=400');
-    }
+    // // Share on LinkedIn
+    // function shareOnLinkedIn(shareUrl) {
+    //   // Open the LinkedIn share dialog
+    //   window.open('https://www.linkedin.com/shareArticle?url=' + encodeURIComponent(shareUrl), 'LinkedIn Share', 'width=600,height=400');
+    // }
 
-    // Generate the share URL based on the current QR code data
-    function generateShareUrl() {
-      // Replace this with your actual share URL generation logic
-      const qrCodeData = 'QR Code data';
-      return 'https://aacode.com/share?data=' + encodeURIComponent(qrCodeData);
-    }
+    // // Generate the share URL based on the current QR code data
+    // function generateShareUrl() {
+    //   // Replace this with your actual share URL generation logic
+    //   const qrCodeData = 'QR Code data';
+    //   return 'https://aacode.com/share?data=' + encodeURIComponent(qrCodeData);
+    // }
 
     // Download the QR code
     // function downloadQRCode(qrCodeUrl) {
@@ -240,18 +279,27 @@
     //   link.click();
     // }
 
-    document.addEventListener('DOMContentLoaded', function() {
-    const languageLinks = document.querySelectorAll('.language-link');
+    // document.addEventListener('DOMContentLoaded', function() {
+    //   const languageLinks = document.querySelectorAll('.language-link');
 
-    languageLinks.forEach(function(link) {
-      link.addEventListener('click', function(event) {
-        event.preventDefault();
-        const selectedLanguage = this.textContent;
-        // Perform language change actions based on the selected language
-        console.log('Selected Language:', selectedLanguage);
-      });
-    });
-  });
+    //   languageLinks.forEach(function(link) {
+    //     link.addEventListener('click', function(event) {
+    //       event.preventDefault();
+    //       const selectedLanguage = this.textContent;
+    //       // Perform language change actions based on the selected language
+    //       console.log('Selected Language:', selectedLanguage);
+    //     });
+    //   });
+    // });
 
   }
 </script>
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en'
+    }, 'google_translate_element');
+  }
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
