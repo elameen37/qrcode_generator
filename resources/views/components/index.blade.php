@@ -52,16 +52,6 @@
       <span class="text-gray-300">|</span>
       <a href="contact" class="text-gray-300 hover:text-white pl-4">Contact Us</a>
     </div>
-    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
-    <!-- <div class="language-selector flex justify-center ml-16">
-      <a href="#" class="language-link text-gray-300 hover:text-white pr-4 font-medium">English</a>
-      <span class="separator text-gray-300 hover:text-white pr-4 mx-2">|</span>
-      <a href="#" class="language-link text-gray-300 hover:text-white pr-4 font-medium">العربية</a>
-      <span class="separator text-gray-300 hover:text-white mx-2">|</span>
-      <a href="#" class="language-link text-gray-300 hover:text-white pr-4 font-medium">Français</a>
-      <span class="separator text-gray-300 hover:text-white mx-2">|</span>
-      <a href="#" class="language-link text-gray-300 hover:text-white pr-4 font-medium">Español</a>
-    </div> -->
 
     <div class="ml-auto mr-16 flex justify-center">
       <div id="google_translate_element"></div>
@@ -167,17 +157,6 @@
         console.error('Failed to download QR code:', error);
       }
     }
-
-    // Create the HTML template for the share buttons
-    //   function createShareButtonsTemplate() {
-    //     return `
-    //   <div class="flex justify-end space-x-4 mt-4">
-    //     // <button class="share-button facebook"><i class="fab fa-facebook"></i> Share on Facebook</button>
-    //     // <button class="share-button instagram"><i class="fab fa-instagram"></i> Share on Instagram</button>
-    //     // <button class="share-button linkedin"><i class="fab fa-linkedin"></i> Share on LinkedIn</button>
-    //   </div>
-    // `;
-    //   }
     // Display the QR code in a popup with share buttons
     Swal.fire({
       imageUrl: qrCodeUrl,
@@ -192,17 +171,14 @@
       //footer: createShareButtonsTemplate(),
       footer: createButtonsTemplate(),
     });
-
     // Add an event listener to the download button
     document.getElementById('downloadBtn').addEventListener('click', function() {
       downloadQRCode(qrCodeUrl);
     });
-
     // Add an event listener to the close button
     document.getElementById('closePopupBtn').addEventListener('click', function() {
       Swal.close(); // Close the popup when the button is clicked
     });
-
     // Add event listener to the share dropdown
     document.addEventListener('DOMContentLoaded', function() {
       const shareDropdown = document.getElementById('shareDropdown');
@@ -224,74 +200,10 @@
           default:
             return;
         }
-
         // Open the share link in a new window/tab
         window.open(shareLink, '_blank');
       });
     });
-
-    // Add event listeners to the share buttons
-    // document.querySelector('.share-button.facebook').addEventListener('click', function() {
-    //   const shareUrl = generateShareUrl();
-    //   shareOnFacebook(shareUrl);
-    // });
-
-    // document.querySelector('.share-button.instagram').addEventListener('click', function() {
-    //   const shareUrl = generateShareUrl();
-    //   shareOnInstagram(shareUrl);
-    // });
-
-    // document.querySelector('.share-button.linkedin').addEventListener('click', function() {
-    //   const shareUrl = generateShareUrl();
-    //   shareOnLinkedIn(shareUrl);
-    // });
-
-    // // Share on Facebook
-    // function shareOnFacebook(shareUrl) {
-    //   // Open the Facebook share dialog
-    //   window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), 'Facebook Share', 'width=600,height=400');
-    // }
-
-    // // Share on Instagram
-    // function shareOnInstagram(shareUrl) {
-    //   // Open the Instagram share dialog
-    //   window.open('https://www.instagram.com' + encodeURIComponent(shareUrl), 'Instagram Share', 'width=600,height=400');
-    // }
-
-    // // Share on LinkedIn
-    // function shareOnLinkedIn(shareUrl) {
-    //   // Open the LinkedIn share dialog
-    //   window.open('https://www.linkedin.com/shareArticle?url=' + encodeURIComponent(shareUrl), 'LinkedIn Share', 'width=600,height=400');
-    // }
-
-    // // Generate the share URL based on the current QR code data
-    // function generateShareUrl() {
-    //   // Replace this with your actual share URL generation logic
-    //   const qrCodeData = 'QR Code data';
-    //   return 'https://aacode.com/share?data=' + encodeURIComponent(qrCodeData);
-    // }
-
-    // Download the QR code
-    // function downloadQRCode(qrCodeUrl) {
-    //   const link = document.createElement('a');
-    //   link.href = qrCodeUrl;
-    //   link.download = 'qrcode.png';
-    //   link.click();
-    // }
-
-    // document.addEventListener('DOMContentLoaded', function() {
-    //   const languageLinks = document.querySelectorAll('.language-link');
-
-    //   languageLinks.forEach(function(link) {
-    //     link.addEventListener('click', function(event) {
-    //       event.preventDefault();
-    //       const selectedLanguage = this.textContent;
-    //       // Perform language change actions based on the selected language
-    //       console.log('Selected Language:', selectedLanguage);
-    //     });
-    //   });
-    // });
-
   }
 </script>
 <script type="text/javascript">
@@ -301,5 +213,4 @@
     }, 'google_translate_element');
   }
 </script>
-
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

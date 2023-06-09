@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -16,7 +15,7 @@
 <body>
     <header class="bg-black py-3">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="{{ url('/') }}"><img src="{{ asset('logo/logo.png') }}" alt="Logo" class="h-16 w-16 mr-2"></a>
+            <a href="{{ url('/') }}"><img src="{{ asset('logo/logo_tech.png') }}" alt="Logo" class="h-15 w-36 mr-2"></a>
             <div class="flex items-center">
                 <nav>
                     <a href="/" class="text-white mr-4">Home</a>

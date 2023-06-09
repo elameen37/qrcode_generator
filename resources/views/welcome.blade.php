@@ -27,17 +27,12 @@
         <div class="content">
             <div class="c1">
                 <h4>GENERATE FREE QR-CODE</h4>
-                <h6>with a Reliable Platform That Never Fails</h6>
-            </div>
-            <button type="button" class="btn-primary"><a href="{{ route('register') }}">Get Started</a></button>
-        </div>
-
-        <div class="content">
-            <div><img src="{{ asset('images/landing1.gif') }}" alt="" width="600px" height="500px"></div>
-        </div>
-
+                <h6>With a Reliable Platform That Never Fails</h6>
+            </div><br>
+            <button type="button" class="btn-primary"><a href="{{ route('register') }}">+ Get Started</a></button>
+        </div><br>
+        <div><img src="{{ asset('images/landing1.gif') }}" alt="" width="600px" height="500px"></div>
     </section>
-
     <!-- footer -->
     <footer>
         <div class="container">
@@ -59,13 +54,13 @@
 
             <div class="sec contactBx">
                 <h2>Our Team</h2>
-                <p>Aminu Shaibu</p>
+                <p>Aminu Shaibu - Fullstack</p>
                 <ul class="sci">
                     <li><a href="https://github.com/elameen37/"><i class="fa fa-github"></i></a></li>
                     <li><a href="https://linkedin.com/in/aminu-shaibu-ab92368b"><i class="fa fa-linkedin"></i></a></li>
                     <li><a href="https://twitter.com/lmninfohub"><i class="fa fa-twitter"></i></a></li>
                 </ul>
-                <p>Kehinde Raphael Babalola</p>
+                <p>Kehinde Raphael Babalola - Fullstack</p>
                 <ul class="sci">
                     <li><a href="https://github.com/geeflows44"><i class="fa fa-github"></i></a></li>
                 </ul>
