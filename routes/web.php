@@ -9,16 +9,9 @@ use App\Mail\ContactFormMail;
 use Illuminate\http\Request;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
-//Route::get('/contact',[ContactController::class, 'contact']);
-
-// Route::get('/generate',[GenerateController::class, 'GenerateMethod']);   //->name('home.page');
-
-// Route::get('/generate', function () {
-//     return view('generate');
-// });
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
