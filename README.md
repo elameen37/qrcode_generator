@@ -2,7 +2,7 @@
 
 QR_Code_Generator
 ## Live link
- click [here]() to visit the website 
+ click [here](https://qrcode-generator-orpin.vercel.app) to visit the website 
 
 
 ### Description
