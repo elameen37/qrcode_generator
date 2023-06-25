@@ -33,10 +33,10 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
 
 require __DIR__.'/../vendor/autoload.php';
 
-/*//Output directory
-$app->bind('path.public', function() {
-    return __DIR__.'/../public_html';
-});*/
+// //Output directory
+// $app->bind('path.public', function() {
+//     return __DIR__.'/../public_html';
+// });
 
 
 /*
